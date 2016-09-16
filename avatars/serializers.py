@@ -40,7 +40,7 @@ class AdminAvatarSerializer(serializers.ModelSerializer):
     color2 = serializers.CharField(validators=[is_hex_value], required=False)
     color3 = serializers.CharField(validators=[is_hex_value], required=False)
     text_color = serializers.CharField(validators=[is_hex_value])
-    desc = serializers.CharField(min_length=10, max_length=90)
+    desc = serializers.CharField(min_length=10, max_length=80)
     angle = serializers.IntegerField(min_value=0, max_value=360)
 
     class Meta:

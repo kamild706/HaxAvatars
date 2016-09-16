@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Avatar(models.Model):
-    desc = models.CharField(max_length=90)
+    desc = models.CharField(max_length=80)
     team = models.CharField(max_length=4)
     angle = models.PositiveSmallIntegerField()
     text_color = models.CharField(max_length=8)

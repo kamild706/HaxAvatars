@@ -17,6 +17,6 @@ from django.conf.urls import url, include
 
 
 urlpatterns = [
-    url(r'^api/v1/avatars/', include('avatars.urls')),
+    url(r'^v1/avatars/', include('avatars.urls')),
 ]
 
