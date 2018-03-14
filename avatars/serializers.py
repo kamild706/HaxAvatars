@@ -18,7 +18,7 @@ import re
 #         model = Avatar
 
 
-def is_hex_value(value):
+def is_value_hexadecimal(value):
     pattern = re.compile('^([a-f\d]{6}|[a-f\d]{8})$', re.I)
     if not pattern.match(value):
         raise serializers.ValidationError("Must be valid hexadecimal string")
@@ -30,16 +30,23 @@ def is_team_name_correct(team_name):
 
 
 class AvatarSerializer(serializers.ModelSerializer):
+    color1 = serializers.CharField(validators=[is_value_hexadecimal])
+    color2 = serializers.CharField(validators=[is_value_hexadecimal], required=False)
+    color3 = serializers.CharField(validators=[is_value_hexadecimal], required=False)
+    text_color = serializers.CharField(validators=[is_value_hexadecimal])
+    desc = serializers.CharField(min_length=10, max_length=80)
+    angle = serializers.IntegerField(min_value=0, max_value=360)
+
     class Meta:
         model = Avatar
-        exclude = ('id', 'is_deleted', 'modified_at')
+        exclude = ('id', 'is_deleted', 'modified_at', 'created_at')
 
 
 class AdminAvatarSerializer(serializers.ModelSerializer):
-    color1 = serializers.CharField(validators=[is_hex_value])
-    color2 = serializers.CharField(validators=[is_hex_value], required=False)
-    color3 = serializers.CharField(validators=[is_hex_value], required=False)
-    text_color = serializers.CharField(validators=[is_hex_value])
+    color1 = serializers.CharField(validators=[is_value_hexadecimal])
+    color2 = serializers.CharField(validators=[is_value_hexadecimal], required=False)
+    color3 = serializers.CharField(validators=[is_value_hexadecimal], required=False)
+    text_color = serializers.CharField(validators=[is_value_hexadecimal])
     desc = serializers.CharField(min_length=10, max_length=80)
     angle = serializers.IntegerField(min_value=0, max_value=360)
 
